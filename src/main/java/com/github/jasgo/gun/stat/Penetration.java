@@ -1,4 +1,4 @@
-package com.github.jasgo.gun;
+package com.github.jasgo.gun.stat;
 
 public enum Penetration {
     NONE(0),

@@ -1,0 +1,8 @@
+testgun:
+  damage: 5.0
+  magazine: 10
+  reload: 1.0
+  fireRate: 0.01
+  bulletSpeed: 1.0
+  bulletCount: 100
+  penetration: LOW

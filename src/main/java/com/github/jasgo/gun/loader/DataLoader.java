@@ -1,4 +1,4 @@
-package com.github.jasgo.gun.manager;
+package com.github.jasgo.gun.loader;
 
 import com.github.jasgo.gun.Gun;
 import org.bukkit.configuration.file.FileConfiguration;
@@ -8,18 +8,17 @@ import java.io.File;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 
-public class DataManager {
+public class DataLoader {
 
-    private final Gun plugin;
     private FileConfiguration[] config;
 
-    public DataManager(Gun plugin) {
-        this.plugin = plugin;
+    public DataLoader() {
     }
 
     public FileConfiguration load(String name) {
-        FileConfiguration config = YamlConfiguration.loadConfiguration(new File(plugin.getDataFolder(), name));
-        InputStream defaultStream = plugin.getResource(name);
+        Gun plugin = Gun.getInstance();
+        FileConfiguration config = YamlConfiguration.loadConfiguration(new File(plugin.getDataFolder(), "/gunInfo/" + name));
+        InputStream defaultStream = plugin.getResource("/gunInfo/" + name);
         if (defaultStream != null) {
             YamlConfiguration defaultConfig = YamlConfiguration.loadConfiguration(new InputStreamReader(defaultStream));
             config.setDefaults(defaultConfig);
@@ -28,7 +27,9 @@ public class DataManager {
     }
 
     public void loadAll() {
-        File[] files = plugin.getDataFolder().listFiles();
+        Gun plugin = Gun.getInstance();
+        File dir = new File(plugin.getDataFolder(), "/gunInfo/");
+        File[] files = dir.listFiles();
         if (files == null) return;
         FileConfiguration[] configs = new FileConfiguration[files.length];
         for (int i = 0; i < files.length; i++) {
