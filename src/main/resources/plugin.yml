@@ -1,0 +1,7 @@
+name: Gun
+version: '${version}'
+main: com.github.jasgo.gun.Gun
+
+commands:
+  gun:
+    description: "/gun"
